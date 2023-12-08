@@ -1,71 +1,71 @@
 package Buoi3;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Product> productList = new ArrayList<>();
+        Store myStore = new Store(5);
 
         int choice;
         do {
-            System.out.println("1. Nhập sản phẩm");
-            System.out.println("2. Tính giá bán cho từng sản phẩm");
-            System.out.println("3. Hiển thị danh sách sản phẩm theo giá bán tăng dần");
-            System.out.println("4. Thoát");
-            System.out.print("Chọn chức năng: ");
+            System.out.println("Chọn thao tác:");
+            System.out.println("1. Thêm sản phẩm");
+            System.out.println("2. Tìm kiếm sản phẩm");
+            System.out.println("3. Sắp xếp và hiển thị danh sách sản phẩm");
+            System.out.println("4. Hiển thị danh sách sản phẩm");
+            System.out.println("0. Thoát");
+
+            System.out.print("Nhập lựa chọn của bạn: ");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    // Nhập n sản phẩm
-                    System.out.print("Nhập số lượng sản phẩm: ");
-                    int n = scanner.nextInt();
-                    for (int i = 0; i < n; i++) {
-                        System.out.println("Nhập thông tin sản phẩm thứ " + (i + 1) + ":");
-                        System.out.print("ID: ");
-                        String id = scanner.next();
-                        System.out.print("Tên: ");
-                        String name = scanner.next();
-                        System.out.print("Giá: ");
-                        double price = scanner.nextDouble();
-                        System.out.print("Giảm giá (%): ");
-                        double discount = scanner.nextDouble();
+                    System.out.println("Nhập thông tin sản phẩm:");
+                    System.out.print("ID: ");
+                    String id = scanner.next();
+                    System.out.print("Tên: ");
+                    String name = scanner.next();
+                    System.out.print("Giá: ");
+                    double price = scanner.nextDouble();
+                    System.out.print("Giảm giá (%): ");
+                    double discount = scanner.nextDouble();
 
-                        Product product = new Product(id, name, price, discount);
-                        productList.add(product);
-                    }
+                    myStore.add(new Product(id, name, price, discount));
                     break;
 
                 case 2:
-                    // Tính giá bán cho từng sản phẩm
-                    for (Product product : productList) {
-                        product.calculateSalePrice();
+                    System.out.print("Nhập ID sản phẩm cần tìm: ");
+                    String searchId = scanner.next();
+                    Product foundProduct = myStore.findId(searchId);
+                    if (foundProduct != null) {
+                        System.out.println("Sản phẩm được tìm thấy: " + foundProduct.getName());
+                    } else {
+                        System.out.println("Không tìm thấy sản phẩm có ID = " + searchId);
                     }
-                    System.out.println("Đã tính giá bán cho từng sản phẩm.");
                     break;
 
                 case 3:
-                    // Hiển thị danh sách sản phẩm theo giá bán tăng dần
-                    Collections.sort(productList, Comparator.comparingDouble(Product::getSalePrice));
-                    System.out.println("Danh sách sản phẩm theo giá bán tăng dần:");
-                    for (Product product : productList) {
-                        System.out.println("ID: " + product.getId() + ", Tên: " + product.getName() + ", Giá bán: " + product.getSalePrice());
-                    }
+                    myStore.sort();
+                    myStore.show();
                     break;
 
                 case 4:
-                    System.out.println("Đã thoát chương trình.");
+                    myStore.show();
+                    break;
+
+                case 0:
+                    System.out.println("Chương trình kết thúc.");
                     break;
 
                 default:
                     System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                    break;
             }
-        } while (choice != 4);
+
+        } while (choice != 0);
+
+        scanner.close();
     }
 }
 
