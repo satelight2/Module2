@@ -86,11 +86,11 @@ public class Classes {
         int index = findIndex(st.getId());// Tìm vị trí học viên trong lớp
         if (index != -1) { // Nếu học viên có trong lớp thì xóa
             // Shift elements to remove the student
-            for (int i = index; i < numberOfStudents - 1; i++) { 
+            for (int i = index; i < numberOfStudents - 1; i++) {
                 students[i] = students[i + 1];
             }
             students[numberOfStudents - 1] = null; // Set the last element to null
-            numberOfStudents--;
+            numberOfStudents--; // Reduce the number of students
             System.out.println("Student with ID " + st.getId() + " has been removed from the class.");
             return true;
         } else {
@@ -117,7 +117,7 @@ public class Classes {
      * @param id Mã học viên cần tìm
      * @return trả về đối tượng học viên(Student) được tìm thấy theo mã học viên(id) truyền vào.
      */
-    public Student findId(String id) {
+            public Student findId(String id) {
         int index = findIndex(id);
         return (index != -1) ? students[index] : null; // Return the student if found, otherwise null
     }
