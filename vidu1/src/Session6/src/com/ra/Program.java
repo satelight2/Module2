@@ -1,8 +1,10 @@
-package com.ra;
+package Session6.src.com.ra;
+
+import Session6.src.com.ra.assignment.Employee;
 
 public class Program {
     public static void main(String[] args) {
-        Staff staff = new Employee();
+        Staff staff = new Staff("1", "A", ");
         staff.work();
 
         Service service = new Service() {

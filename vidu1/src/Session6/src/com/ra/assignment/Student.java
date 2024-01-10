@@ -1,4 +1,4 @@
-package com.ra.assignment;
+package Exception.ra.assignment;
 
 public class Student implements BaseEntity {
     private String id;

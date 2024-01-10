@@ -1,4 +1,4 @@
-package com.ra;
+package Exception.ra;
 
 public interface Service {
     // Hằng số
